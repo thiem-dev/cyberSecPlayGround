@@ -1,4 +1,4 @@
-## Scavenger Hunt testing
+## Scavenger Hunt
 check the source code, js, css
 - robots.txt
 - .htaccess (apache default file)
