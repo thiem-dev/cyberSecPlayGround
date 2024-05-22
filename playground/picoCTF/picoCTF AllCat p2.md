@@ -1,5 +1,4 @@
-## Scavenger Hunt 
-
+## Scavenger Hunt testing
 check the source code, js, css
 - robots.txt
 - .htaccess (apache default file)
@@ -8,13 +7,11 @@ check the source code, js, css
 picoCTF{th4ts_4_l0t_0f_pl4c3s_2_lO0k_fa04427c}
 
 ## Shop
-
 - Buy a negative amount of items to get more gold to buy the flag item. Then buy the flag item, and decode the ASCII
 
 picoCTF{b4d_brogrammer_3da34a8f}
 
 ## Speedand Feeds
-
 Put the Gcode into a CNC viewer
 
 ## Wireshark doo dooo do doo...
