@@ -1,3 +1,28 @@
+## Shop
+
+- Buy a negative amount of items to get more gold to buy the flag item. Then buy the flag item, and decode the ASCII
+
+picoCTF{b4d_brogrammer_3da34a8f}
+
+## Speedand Feeds
+
+Put the Gcode into a CNC viewer
+
+## Wireshark doo dooo do doo...
+open it in wireshark, right click follow stream, look through the streams for 
+
+Stream 5
+Gur synt vf cvpbPGS{c33xno00_1_f33_h_qrnqorrs}
+
+
+## Web Exploit Cookies
+Change cookie Name value to 18 on the /check endpoint
+
+Use Burpsuite. Proxy-Intercept it for /check endpoint. Peer through site, Rclick send to Intruder parameterize the name variable (sniper, numbers, set 0 - 20 attack)
+
+picoCTF{tru3_d3t3ct1ve_0r_ju5t_lucky?832b0699}
+
+
 ## ARMssembly 0
 https://surya-dev.medium.com/armssembly-0-picoctf-8000fa11e2b0 
 
@@ -9,7 +34,6 @@ aarch64-linux-gnu-gcc -static -o chall chall.o
 
 python -c "print(hex(1592237099))"
 0x5ee79c2b
-
 
 
 ## tunn3l v1s10n
@@ -25,15 +49,4 @@ it's a bm
 picoCTF{4f11048e83ffc7d342a15bd2309b47de}  
 ```
 
-## Web Exploit Cookies
-Change cookie Name value to 18 on the /check endpoint
 
-Use Burpsuite. Proxy-Intercept it for /check endpoint. Peer through site, Rclick send to Intruder parameterize the name variable (sniper, numbers, set 0 - 20 attack)
-
-picoCTF{tru3_d3t3ct1ve_0r_ju5t_lucky?832b0699}
-
-## Wireshark doo dooo do doo...
-open it in wireshark, right click follow stream, look through the streams for 
-
-Stream 5
-Gur synt vf cvpbPGS{c33xno00_1_f33_h_qrnqorrs}
