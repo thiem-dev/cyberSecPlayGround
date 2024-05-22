@@ -1,3 +1,13 @@
+## Commitment Issues
+- Download the files, unzip
+
+- cd into main folder, `git log` `git checkout [commit id]`
+- cat message.txt
+
+$ cat message.txt
+picoCTF{s@n1t1z3_30e86d36}
+
+
 ## Scavenger Hunt
 check the source code, js, css
 - robots.txt
