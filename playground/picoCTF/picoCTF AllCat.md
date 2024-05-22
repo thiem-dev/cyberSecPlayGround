@@ -27,6 +27,9 @@ picoCTF{b4d_brogrammer_3da34a8f}
 ## Speedand Feeds
 Put the Gcode into a CNC viewer
 
+![speedandfeed](https://github.com/thiem-dev/ePortfolio-cyberSecPlayGround/assets/16260510/4bcbc09a-b96f-4fd1-9ebf-77fbdc846524)
+
+
 ## Wireshark doo dooo do doo...
 open it in wireshark, right click follow stream, look through the streams for 
 
