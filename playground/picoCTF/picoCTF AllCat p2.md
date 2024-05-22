@@ -1,3 +1,12 @@
+## Scavenger Hunt 
+
+check the source code, js, css
+- robots.txt
+- .htaccess (apache default file)
+- .DS_Store (MAC default files)
+
+picoCTF{th4ts_4_l0t_0f_pl4c3s_2_lO0k_fa04427c}
+
 ## Shop
 
 - Buy a negative amount of items to get more gold to buy the flag item. Then buy the flag item, and decode the ASCII
