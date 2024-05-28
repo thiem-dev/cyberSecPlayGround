@@ -1,0 +1,5 @@
+
+
+## troll in toolbox
+- -i ignore case and * search all files for troll, -r recursive
+`grep -r -i "troll" *` 
