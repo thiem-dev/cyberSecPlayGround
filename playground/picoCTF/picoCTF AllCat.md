@@ -19,10 +19,16 @@ picoCTF{th4ts_4_l0t_0f_pl4c3s_2_lO0k_fa04427c}
 ## Shop
 - Buy a negative amount of items to get more gold to buy the flag item. Then buy the flag item, and decode the ASCII
 
+![image](https://github.com/thiem-dev/ePortfolio-cyberSecPlayGround/assets/16260510/c8080390-fc86-402e-8b4b-6bc8ba8113aa)
+
+
 picoCTF{b4d_brogrammer_3da34a8f}
 
 ## Speedand Feeds
 Put the Gcode into a CNC viewer
+
+![speedandfeed](https://github.com/thiem-dev/ePortfolio-cyberSecPlayGround/assets/16260510/4bcbc09a-b96f-4fd1-9ebf-77fbdc846524)
+
 
 ## Wireshark doo dooo do doo...
 open it in wireshark, right click follow stream, look through the streams for 
