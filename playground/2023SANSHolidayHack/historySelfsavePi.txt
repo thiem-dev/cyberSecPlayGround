@@ -1,0 +1,25 @@
+1  echo troll_9394554126440791
+    2  ls -l
+    3  ls -la
+    4  cat troll_19315479765589239 
+    5  rm troll_19315479765589239 
+    6  ls -l
+    7  pwd
+    8  ls -la
+    9  cat .bash_history 
+   10  env
+   11  ls -l
+   12  cd workshop/
+   13  ls -l
+   14  grep -i -r "troll" *
+   15  chmod 755 present_engine 
+   16  ./present_engine 
+   17  cd electrical/
+   18  history
+   19  mv blown_fuse0 fuse0
+   20  ls -la
+   21  ln -s ./fuse0 ./fuse1
+   22  cp fuse1 fuse2
+   23  echo "TROLL_REPELLENT" >> fuse2
+   24  cd /opt/troll_den/
+   25  history
