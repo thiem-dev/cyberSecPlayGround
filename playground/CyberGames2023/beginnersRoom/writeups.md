@@ -177,3 +177,8 @@ hmmm seems like an interesting lead on part id, let's enum through....
 </part>
 
 ```
+![alt text](partsShop1.png)
+
+
+## dd
+
