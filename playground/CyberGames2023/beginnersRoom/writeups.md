@@ -179,10 +179,19 @@ hmmm seems like an interesting lead on part id, let's enum through....
 ```
 ![alt text](partsShop1.png)
 
-
 ## SCS [Web] - TODO
 
-1. burp'd the site
+### Task
+```
+SCS [Web]
+150
+We uncovered a code repository and it appears to be where ARIA is storing mission-critical code. We need to break in!
+
+https://uscybercombine-s4-scs.chals.io/
+```
+
+
+1. burp'd the site to see what each page did
 2. took a look at the js. 
     - Tried js and SQL injection... no luck. 
     - Tried /robots.txt ... nothing
@@ -243,3 +252,89 @@ hmmm seems like an interesting lead on part id, let's enum through....
 
     - I'm starting to think this was from the prior intruder sniper attack I gave it.
       
+## Spreading Out [Web]
+### Task
+```
+Spreading Out [Web]
+150
+"ARIA is going out and touching files it shouldn't, can you track down where all it has gone?
+
+https://uscybercombine-s4-spreading-out.chals.io/
+```
+
+### My Solve
+
+- nothing on waybackmachine
+- checked /robots.txt
+  - `1/5: SIVBGR{ARIA_1s` ... looks like it's a lead.. time to dirb the site
+    - dirb https://uscybercombine-s4-spreading-out.chals.io/ -w /usr/share/dirb/wordlists/small.txt
+        ```
+        + https://uscybercombine-s4-spreading-out.chals.io/readme (CODE:200|SIZE:16)                    
+        + https://uscybercombine-s4-spreading-out.chals.io/wwwlog (CODE:403|SIZE:22)   
+        ```
+        - my other dirbs sessions closed from too many errors
+    - did `curl -I` on the site to identify the site. 
+        ```js
+        HTTP/1.1 200 OK
+          Server: Werkzeug/3.0.3 Python/3.10.14
+          Date: Sat, 01 Jun 2024 01:58:06 GMT
+          Content-Type: text/html; charset=utf-8
+          Content-Length: 19
+          Connection: close
+        ```
+
+      - burp'd my word list `spreadOutWordList.txt` ^ according to the server info... no luck..
+- /readme : `3/5: _4lw4ys_4nd`
+- /sitemap.xml : `4/5: _c4nnot_b3` 
+- /wwwlog : Permission not granted
+
+- if the hints so far are 4 are As and 3 is E. 1 is S
+`SIVBGR{ARIA_1s_3v3rywh3r3_4lw4ys_4nd_c4nnot_b3_found}` ... nope..
+
+
+- trying ffuf: `ffuf -w /usr/share/wordlists/dirb/common.txt -u https://uscybercombine-s4-spreading-out.chals.io/FUZZ -recursion -recursion-depth 3` 
+
+
+- tried to send it a POST request got back: 
+```
+HTTP/1.1 405 METHOD NOT ALLOWED
+Server: Werkzeug/3.0.3 Python/3.10.14
+Date: Sat, 01 Jun 2024 02:36:08 GMT
+Content-Type: text/html; charset=utf-8
+Allow: GET, HEAD, OPTIONS <----Look here
+Content-Length: 153
+Connection: close
+
+
+<!doctype html>
+<html lang=en>
+<title>405 Method Not Allowed</title>
+<h1>Method Not Allowed</h1>
+<p>The method is not allowed for the requested URL.</p>
+```
+
+
+did an nmap -sS
+```
+PORT     STATE SERVICE
+23/tcp   open  telnet
+80/tcp   open  http
+443/tcp  open  https
+8443/tcp open  https-alt
+
+```
+
+Possible lead...
+dirb https://uscybercombine-s4-spreading-out.chals.io/static/
+
+
+`curl -X GET "https://uscybercombine-s4-spreading-out.chals.io/" -H "Content-type: text/xml; charset=UTF-8"`
+
+
+## biocheck [web]
+
+### task
+```js
+```
+
+### My solve
