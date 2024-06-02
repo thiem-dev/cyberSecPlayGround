@@ -621,3 +621,21 @@ etc...
 
 - made a python program w/ help of GPT: quickMaths.py, it created a websocket to keep constant connection to the server (I don't think you really need to, could telnet or nc still) I checked the regex via https://regex101.com/ and ran it. the program only has `+ - * / //` type operations apparently
 - and hit a road block pretty quick... with `//`. it's division removing the remainder. Silly JS in me didn't know what it was think it was a comment. Anyways... modified the python program regex and switch statement for the `//` operator and continued onward. And Bingo! Good to go. `SIVBGR{L00kM0m!_ICANDO_m4th}`
+
+
+## You Have Mail [Forensics]
+
+### Task
+```
+150
+This challenge is composed of an email, more specifically a .eml file. The email introduces the theme for the forensics group, which is a whistleblower announcing that alien life exists on Earth, and the government knows about it.
+
+https://ctfd.uscybergames.com/files/3679aeb619d8182d54e43d4d46b0b4fc/URGENT_Proof_of_UFO_Read_in_a_secure_location.eml?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyMzN9.ZlvdxQ.5539fgtiHd8jfRzDItcTT78bHQg
+```
+
+### My solve
+- first open the .eml in notepad
+- password for zip is: `Secure_Code:Order_66`
+- Did you know CyberChef can extract zip from encodings? Yeah it's base64 then the unzip recipe with the password and bam!
+
+![alt text](aliensEmail.png)
