@@ -534,20 +534,59 @@ Alice and Bob have been experimenting with a way to send flags back and forth se
 nc 0.cloud.chals.io 32820
 ```
 
-Reach out the the server and keep listening
-`echo "Hello" | nc 0.cloud.chals.io 32820 -v -l`
 
-- I get the response (sometimes):
+### My Solve
+- Reach out the the server and keep listening `nc 0.cloud.chals.io 32820 -v`
+- The connection keeps closing by itself, and I think I might be getting blocked or rate limited. I stopped getting responses. I think the server is only up for few seconds once every 3-5 minutes? got a response at 9:30pm
+
+
+
+- Finally got response with 
+  - telnet to keep a more constant connection. 
+  - or `while true; do echo "47" | nc 165.227.210.30 -p 32820 -v; sleep 1; done` to keep it constant
 ```
-g = 12
-p = 53
-a = 8 
-b = 67 
+telnet 0.cloud.chals.io 32820
+
+Trying 165.227.210.30...
+Connected to 0.cloud.chals.io.
+Escape character is '^]'.
+g =  12
+p =  53
+a =  8
+b =  67
+
+What is their shared secret?
+Enter your input: 47
+
+To find the flag you will need to perform a bitwise XOR operation between each byte of the encrypted message and the corresponding byte of the shared secret key.
+7c 66 79 6d 68 7d 54 1b 70 49 43 1b 48 70 49 5d 1f 42 70 1b 43 1e 4c 1c 70 1b 41 4b 70 4d 1f 4d 52
+Connection closed by foreign host.
+
+47 is 0x2F : to do XOR operations on the whole set
+
+
+First Byte:
+
+Encrypted byte: 0x7c
+Shared secret byte: 0x2f
+XOR operation: 0x7c ^ 0x2f = 0x53
+Convert 0x53 to character: S
+Second Byte:
+
+Encrypted byte: 0x66
+Shared secret byte: 0x2f
+XOR operation: 0x66 ^ 0x2f = 0x49
+Convert 0x49 to character: I
+Third Byte:
+
+Encrypted byte: 0x79
+Shared secret byte: 0x2f
+XOR operation: 0x79 ^ 0x2f = 0x56
+Convert 0x56 to character: V
+
+etc...
 ```
 
-- Looks like I might have been temp blocked for nc so many often. Will try again later.
+`SIVBGR{4_fl4g_fr0m_4l1c3_4nd_b0b}`
 
-`
-while true; do echo "47" | nc 165.227.210.30 -p 32820 -v; sleep 1; done
-`
 
