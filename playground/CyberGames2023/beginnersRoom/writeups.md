@@ -488,6 +488,7 @@ https://ctfd.uscybergames.com/files/e9eb2ac473c1e755d0acf38582547080/challenge.t
 ```
 
 - Hint is referring to CyberChef. COOK THIS SHIT UP!!! 
+- I tried https://github.com/mufeedvh/basecrack also, was somewhat helpful at identifying with its magic mode recursion decoder (but it died at QWERTY), so I continued with: https://www.cachesleuth.com/multidecoder/ and then I had to CyberChef and play around with ROTs until it worked (by sheer luck)
 
 - base64 encoding
 ```
