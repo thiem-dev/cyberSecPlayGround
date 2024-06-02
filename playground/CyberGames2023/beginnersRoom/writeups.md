@@ -618,5 +618,5 @@ etc...
   ```
 
 
-- made a python program w/ help of GPT: quickMaths.py, I checked the regex via https://regex101.com/ and ran it. the program only has `+ - * / //` type operations apparently
+- made a python program w/ help of GPT: quickMaths.py, it created a websocket to keep constant connection to the server (I don't think you really need to, could telnet or nc still) I checked the regex via https://regex101.com/ and ran it. the program only has `+ - * / //` type operations apparently
 - and hit a road block pretty quick... with `//`. it's division removing the remainder. Silly JS in me didn't know what it was think it was a comment. Anyways... modified the python program regex and switch statement for the `//` operator and continued onward. And Bingo! Good to go. `SIVBGR{L00kM0m!_ICANDO_m4th}`
