@@ -586,7 +586,37 @@ Convert 0x56 to character: V
 
 etc...
 ```
+![alt text](programmerCalculatorXOR.png)
 
-`SIVBGR{4_fl4g_fr0m_4l1c3_4nd_b0b}`
+
+  - `SIVBGR{4_fl4g_fr0m_4l1c3_4nd_b0b}`
 
 
+
+## Super Duper Quick Maths [MISC]
+
+### Task 
+  ```
+  Solve my math test and you'll get my flag!
+
+  nc 0.cloud.chals.io 15072
+  ```
+
+
+- After nc into the server: 
+
+  ```
+  Received: 
+      Solve my math test and you'll get my flag.
+      But I was told you were really fast at math...
+      I bet you can't solve 50 questions in a small timeframe...
+      You got 3 seconds per problem.
+      Now GO!
+
+  Received: 30 * 4
+
+  ```
+
+
+- made a python program w/ help of GPT: quickMaths.py, I checked the regex via https://regex101.com/ and ran it. the program only has `+ - * / //` type operations apparently
+- and hit a road block pretty quick... with `//`. it's division removing the remainder. Silly JS in me didn't know what it was think it was a comment. Anyways... modified the python program regex and switch statement for the `//` operator and continued onward. And Bingo! Good to go. `SIVBGR{L00kM0m!_ICANDO_m4th}`
