@@ -16,7 +16,7 @@ URL encode the a malicious code to curl the localhost to get to `/shutdown`
 
 ## Secret [Forensics]
 - open in kali and left click highlight over your items
-- ![alt text](topsecret.png)
+- ![alt text](topsecretHiddenMsg.png)
 
 
 
@@ -252,7 +252,7 @@ https://uscybercombine-s4-scs.chals.io/
 
     - I'm starting to think this was from the prior intruder sniper attack I gave it.
       
-## Spreading Out [Web]
+## Spreading Out [Web] - TODO
 ### Task
 ```
 Spreading Out [Web]
@@ -364,7 +364,7 @@ dirb https://uscybercombine-s4-spreading-out.chals.io/static/
 `curl -X GET "https://uscybercombine-s4-spreading-out.chals.io/" -H "Content-type: text/xml; charset=UTF-8"`
 
 
-## biocheck [web]
+## Biocheck [web] - TODO
 
 ### task
 ```js
@@ -379,7 +379,7 @@ https://uscybercombine-s4-biocheck.chals.io/
 ### My solve
 
 
-## Cloud Storage [Misc]
+## Cloud Storage [Misc] - TODO
 
 ### Task 
 ```js
@@ -639,3 +639,63 @@ https://ctfd.uscybergames.com/files/3679aeb619d8182d54e43d4d46b0b4fc/URGENT_Proo
 - Did you know CyberChef can extract zip from encodings? Yeah it's base64 then the unzip recipe with the password and bam!
 
 ![alt text](aliensEmail.png)
+
+
+
+## Container Chronicles [Misc] - TODO
+```
+150
+Welcome, aspiring digital detectives, to the Container Chronicles challenge! Your mission, should you choose to accept it, is to delve into the depths of a seemingly ordinary image of a shipping container and uncover its hidden secrets.
+
+Within the confines of this digital cargo hold lies a treasure trove of information waiting to be unearthed. Your task revolves around deciphering the manufacturing date of the shipping container concealed within the image. But beware, for the information you seek is not readily visible to the naked eye.
+
+Utilizing your skills, you must meticulously examine every pixel, every byte, and every hidden layer within the image to extract the elusive manufacturing date. Employ various techniques, ranging from simple visual inspection to advanced data analysis, to uncover the truth lurking beneath the surface.
+
+Remember, in the world of digital forensics, every detail matters. Stay vigilant, think outside the box, and be prepared to embark on a journey through the intricate labyrinth of data concealed within the confines of this innocuous image.
+
+Are you ready to unravel the mysteries of the Container Chronicles? The fate of the cargo rests in your hands. Good luck, and may the digital winds guide you to victory!
+
+https://ctfd.uscybergames.com/files/e51898ed21dacdb7d86c5960f05fb2dd/containers.png?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyMzR9.Zlvjgw.bCUGR-Tt9ve0gzkDWRzPcXA-1Bo
+```
+
+- open the file, exiftool, nothing, tried strings and hexdump for magic numbers... nothing... 
+- steghide extract -sf containers.png : prompts me with a password. No clues yet
+- tried binwalk. looks like there something here
+    
+    ```bash
+      binwalk containers.png                    
+
+      DECIMAL       HEXADECIMAL     DESCRIPTION
+      --------------------------------------------------------------------------------
+      0             0x0             PNG image, 640 x 480, 8-bit/color RGBA, non-interlaced
+      41            0x29            Zlib compressed data, compressed
+      87900         0x1575C         MySQL ISAM index file Version 4
+
+    ```
+
+- threw it into cyberchef to extract because there's many sub zlib files inside zlib files, there's gotta be a recursive way to do it. I tried `binwalk -eM`
+
+
+## The Email Where It Happens [Forensics]
+
+### Task 
+```
+150
+Howdy Truth Seekers! It seems that some malware that was strategically shared has begun to phone back home! We believe that this might have some very important information that could help lead us to finally getting to the bottom of this conspiracy regarding extraterrestrial life. Unfortunately the original developer of this tool was recently promoted to customer status and is no longer on good terms with the orginization. This means that we don't have any information on how to decode this traffic. Unfortunately all I have is a PCAP. Can you help us out here?
+https://ctfd.uscybergames.com/files/b694602c1b73e94e94d82977a9acbed9/intercepted_communication.pcap?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyMzV9.Zly-NA.88gavHjKLf65G0smC0sm_dK49b4
+```
+
+
+### My Solve
+
+- opened the file in pcap in wireshark. noticed the packet contents were Base32 in the DNS queries
+- decoded it to be... a message, but it's broken up. 
+
+- Turns out I just have to follow the UDP stream and save the RAW. 
+- then `strings rawStream` and decode it from base32
+`SIVBGR{wh0_n33ds_32_b4s3s}` 
+
+
+
+
+
