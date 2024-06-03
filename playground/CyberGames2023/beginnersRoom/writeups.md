@@ -393,7 +393,7 @@ That service account shouldn't have access to anything other than the cat pictur
 
 We can't afford to have another data breach, so we need to be confident that our flags are secure before we make the switch.
 
-https://ctfd.uscybergames.com/files/f52f1b2363af0e38e2fb053fd6e42582/lateral-replica-423406-n3-f892e5bfb33b.json?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyMzJ9.Zlsl_g.ZtMEVTrx0e41DOpoQAqVZU3Q7CE
+https://ctfd.uscybergames.com/files/f52f1b2363af0e38e2fb053fd6e42582/lateral-replica-423406-n3-f892e5bfb33b.json
 ```
 
 ### My solve
@@ -484,7 +484,7 @@ Let Em Cook [Crypto]
 150
 Someone cooked up some weird text
 
-https://ctfd.uscybergames.com/files/e9eb2ac473c1e755d0acf38582547080/challenge.txt?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNzd9.ZltMqQ.OALNRM3M7SfaE5kAG9flGE5NgAE 
+https://ctfd.uscybergames.com/files/e9eb2ac473c1e755d0acf38582547080/challenge.txt
 ```
 
 - Hint is referring to CyberChef. COOK THIS SHIT UP!!! 
@@ -630,7 +630,7 @@ etc...
 150
 This challenge is composed of an email, more specifically a .eml file. The email introduces the theme for the forensics group, which is a whistleblower announcing that alien life exists on Earth, and the government knows about it.
 
-https://ctfd.uscybergames.com/files/3679aeb619d8182d54e43d4d46b0b4fc/URGENT_Proof_of_UFO_Read_in_a_secure_location.eml?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyMzN9.ZlvdxQ.5539fgtiHd8jfRzDItcTT78bHQg
+https://ctfd.uscybergames.com/files/3679aeb619d8182d54e43d4d46b0b4fc/URGENT_Proof_of_UFO_Read_in_a_secure_location.eml
 ```
 
 ### My solve
@@ -655,7 +655,7 @@ Remember, in the world of digital forensics, every detail matters. Stay vigilant
 
 Are you ready to unravel the mysteries of the Container Chronicles? The fate of the cargo rests in your hands. Good luck, and may the digital winds guide you to victory!
 
-https://ctfd.uscybergames.com/files/e51898ed21dacdb7d86c5960f05fb2dd/containers.png?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyMzR9.Zlvjgw.bCUGR-Tt9ve0gzkDWRzPcXA-1Bo
+https://ctfd.uscybergames.com/files/e51898ed21dacdb7d86c5960f05fb2dd/containers.png
 ```
 
 - open the file, exiftool, nothing, tried strings and hexdump for magic numbers... nothing... 
@@ -682,7 +682,7 @@ https://ctfd.uscybergames.com/files/e51898ed21dacdb7d86c5960f05fb2dd/containers.
 ```
 150
 Howdy Truth Seekers! It seems that some malware that was strategically shared has begun to phone back home! We believe that this might have some very important information that could help lead us to finally getting to the bottom of this conspiracy regarding extraterrestrial life. Unfortunately the original developer of this tool was recently promoted to customer status and is no longer on good terms with the orginization. This means that we don't have any information on how to decode this traffic. Unfortunately all I have is a PCAP. Can you help us out here?
-https://ctfd.uscybergames.com/files/b694602c1b73e94e94d82977a9acbed9/intercepted_communication.pcap?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyMzV9.Zly-NA.88gavHjKLf65G0smC0sm_dK49b4
+https://ctfd.uscybergames.com/files/b694602c1b73e94e94d82977a9acbed9/intercepted_communication.pcap
 ```
 
 
@@ -708,8 +708,8 @@ https://ctfd.uscybergames.com/files/b694602c1b73e94e94d82977a9acbed9/intercepted
 
 nc 167.99.118.184 31339
 
-https://ctfd.uscybergames.com/files/f36e870cf1aadba03df48fb619aecece/hangman?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyODB9.ZlzTyQ.sK9q8RHDUNsjdUjgrJKQhNUuqus
-https://ctfd.uscybergames.com/files/2d69e3d47704f268e77df6813aa3c090/hangman.c?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyODF9.ZlzTyQ.iZEPQYhkyYclv4yCQnnDJd_4EJU 
+https://ctfd.uscybergames.com/files/f36e870cf1aadba03df48fb619aecece/hangman
+https://ctfd.uscybergames.com/files/2d69e3d47704f268e77df6813aa3c090/hangman.c
 ```
 
 
@@ -723,8 +723,8 @@ https://ctfd.uscybergames.com/files/2d69e3d47704f268e77df6813aa3c090/hangman.c?t
 ```
 150 pts
 I learned just learned about RSA and I am pretty sure that I implemented it right. It should be impossible to get my flag.
-https://ctfd.uscybergames.com/files/8e7dee48948ae68674404581b3f105aa/out.txt?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNDF9.Zl3J1w.Cg_UUJCovl4DYPgk4cHc5DX53Po
-https://ctfd.uscybergames.com/files/2dea87a22b7e97f6a707ca86039ed255/main.py?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNDh9.Zl3J1w.BTFDNncdF9XYd8uu37agOL2cZU4
+https://ctfd.uscybergames.com/files/8e7dee48948ae68674404581b3f105aa/out.txt
+https://ctfd.uscybergames.com/files/2dea87a22b7e97f6a707ca86039ed255/main.py
 ```
 
 
@@ -742,25 +742,45 @@ e: 3
 
 
 ## AE-no [Crypto]
-
-
 ### Task
 
 ```
 150
 The AES key can be public as long as the IV is secret right?
-https://ctfd.uscybergames.com/files/18e4ae78b03346392b0e7b2393366a85/out.txt?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNDB9.Zl3OgA.yNXCtVWveunXDyJvAn26MLxk0yU 
-https://ctfd.uscybergames.com/files/afea272a45b1c37a526798b7871bac9a/main.py?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNDl9.Zl3OgA.RgqaqRBwOI6qzIZZcSC3HvGTDko 
+https://ctfd.uscybergames.com/files/18e4ae78b03346392b0e7b2393366a85/out.txt
+https://ctfd.uscybergames.com/files/afea272a45b1c37a526798b7871bac9a/main.py
 ```
-
-
 ### My Solve
 - Because we know the key, the possible flag message `Here is the flag for you: SIVBGR`, the AES Mode, pad, and encoded output. We can reverse engineer this. 
 - with the help of GPT we can reverse engineer the IV via: `binascii.hexlify(guessed_iv)`
   - and `cipher = AES.new(key, AES.MODE_CBC, guessed_iv)` `decrypted_msg = cipher.decrypt(encoded_flag)`
   - and then unpad it: `decrypted_msg = unpad(decrypted_msg, AES.block_size)`
 
-
 `SIVBGR{IV_B33n_H3r3_B3f0r3}` 
 
+
+## All Hashed Out [Crypto]
+```
+150
+https://ctfd.uscybergames.com/files/7f37a3abcfaecaf8fa30c777ee47f809/hint.txt
+https://ctfd.uscybergames.com/files/38a2e2811e019f738aa6556cb9b73aee/short_n_sweet.zip
+```
+
+
+`fcrackzip -v -b -p 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' -u short_n_sweet.zip `
+
+hint from Discord: On my laptop, given the right hashcat settings, it took less than 5 minutes. 2011 Macbook pro running Parrot
+
+
+hashcat -m 13600 ziphash.txt /path/to/wordlist.txt
+
+
+## Prime Time [Crypto]
+
+### Task
+```
+150pts 
+https://ctfd.uscybergames.com/files/7f37a3abcfaecaf8fa30c777ee47f809/hint.txt
+https://ctfd.uscybergames.com/files/38a2e2811e019f738aa6556cb9b73aee/short_n_sweet.zip
+```
 
