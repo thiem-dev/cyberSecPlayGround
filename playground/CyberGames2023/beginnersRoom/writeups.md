@@ -699,3 +699,68 @@ https://ctfd.uscybergames.com/files/b694602c1b73e94e94d82977a9acbed9/intercepted
 
 
 
+## Hangman's Shell [Pwn]
+
+
+### Task
+```
+150 pts
+
+nc 167.99.118.184 31339
+
+https://ctfd.uscybergames.com/files/f36e870cf1aadba03df48fb619aecece/hangman?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyODB9.ZlzTyQ.sK9q8RHDUNsjdUjgrJKQhNUuqus
+https://ctfd.uscybergames.com/files/2d69e3d47704f268e77df6813aa3c090/hangman.c?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyODF9.ZlzTyQ.iZEPQYhkyYclv4yCQnnDJd_4EJU 
+```
+
+
+### My Solve
+
+
+
+## Baby's First RSA [Crypto]
+
+### Task
+```
+150 pts
+I learned just learned about RSA and I am pretty sure that I implemented it right. It should be impossible to get my flag.
+https://ctfd.uscybergames.com/files/8e7dee48948ae68674404581b3f105aa/out.txt?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNDF9.Zl3J1w.Cg_UUJCovl4DYPgk4cHc5DX53Po
+https://ctfd.uscybergames.com/files/2dea87a22b7e97f6a707ca86039ed255/main.py?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNDh9.Zl3J1w.BTFDNncdF9XYd8uu37agOL2cZU4
+```
+
+
+### My Solve
+```js
+Here is your encrypted flag: 11320887921865707970417131707489304941213737344372772560296232001708703523599042195968223212365109776754039820465372975539526543057079098227551678593290445701559045011482149948708333749562432591623529530280037
+Here is your public key:
+n: 54635592099855565238567429816156089377033822002759547411082764468188951140701492941799814994802894116863539008046955775901349438057474600774506026999322449088884781059206427090047834145264757894872328436141156254487939678497662258017309980269148722038770041654103035346970408674206071958598445348607191506511
+e: 3
+
+```
+
+- the hint is RSA cipher, I open the file and see C, N, E and immediately I know what to do. I do the RSA cipher in dCode tool and got the answer
+
+
+
+## AE-no [Crypto]
+
+
+### Task
+
+```
+150
+The AES key can be public as long as the IV is secret right?
+https://ctfd.uscybergames.com/files/18e4ae78b03346392b0e7b2393366a85/out.txt?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNDB9.Zl3OgA.yNXCtVWveunXDyJvAn26MLxk0yU 
+https://ctfd.uscybergames.com/files/afea272a45b1c37a526798b7871bac9a/main.py?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNDl9.Zl3OgA.RgqaqRBwOI6qzIZZcSC3HvGTDko 
+```
+
+
+### My Solve
+- Because we know the key, the possible flag message `Here is the flag for you: SIVBGR`, the AES Mode, pad, and encoded output. We can reverse engineer this. 
+- with the help of GPT we can reverse engineer the IV via: `binascii.hexlify(guessed_iv)`
+  - and `cipher = AES.new(key, AES.MODE_CBC, guessed_iv)` `decrypted_msg = cipher.decrypt(encoded_flag)`
+  - and then unpad it: `decrypted_msg = unpad(decrypted_msg, AES.block_size)`
+
+
+`SIVBGR{IV_B33n_H3r3_B3f0r3}` 
+
+
