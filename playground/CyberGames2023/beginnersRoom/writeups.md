@@ -698,7 +698,6 @@ https://ctfd.uscybergames.com/files/b694602c1b73e94e94d82977a9acbed9/intercepted
 
 
 
-
 ## Hangman's Shell [Pwn]
 
 
@@ -768,6 +767,16 @@ https://ctfd.uscybergames.com/files/38a2e2811e019f738aa6556cb9b73aee/short_n_swe
 
 
 `fcrackzip -v -b -p 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' -u short_n_sweet.zip `
+
+```
+fcrackzip -b -c aA1! -u -l 1-5 -v short_n_sweet.zip
+found file 'build_different.7z', (size cp/uc    389/   377, flags 9, chk b06c)
+found file 'built_different.txt', (size cp/uc    295/   498, flags 9, chk b145)
+checking pw B956~                                   
+
+PASSWORD FOUND!!!!: pw == B!p*3
+
+```
 
 hint from Discord: On my laptop, given the right hashcat settings, it took less than 5 minutes. 2011 Macbook pro running Parrot
 
