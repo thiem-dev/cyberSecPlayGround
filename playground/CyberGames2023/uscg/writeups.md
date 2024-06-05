@@ -30,29 +30,49 @@ https://ctfd.uscybergames.com/files/6f9d8cad46a69ec3408cc68560d9cf64/certified.p
 ![alt text](certified.png)
 
 
-## Touch Grass
+## Touch Grass [Web]
 
 ### Task 
 
 ### My solve
 
 
-## Prime Time 
+## Unravel 
 
+### Task
+```
+Unravel
+331pts
+This challenge has several parts. You are given a PCAP which shows how to attack the service provided below. Reverse the attack to gather and decrypt an unravel{} flag, then provide that to the API (/api/submit_flag) to gain the SIVUSCG{} flag to submit here.
+
+Additional details are provided on the index page of the challenge.
+
+https://ctfd.uscybergames.com/files/302e6b0827e0efc5a05ba792c62a4e42/unravel_exploit.pcap
+
+https://uscybercombine-s4-unravel.chals.io/
+```
+
+### My Solve 
+
+
+- burp : https://uscybercombine-s4-unravel.chals.io/ 
+
+
+
+## Emoticonsole
 ### Task 
 ```
-Prime Time [Crypto]
-150
+462
+Finally, a programming language that is Gen Z approved!
+
+Author: tsuto
+
+https://ctfd.uscybergames.com/files/2a0330a42fa526e85a0e5333b10a8873/program.emo
+https://ctfd.uscybergames.com/files/08f708f633199eb11e5113999d3d3d5b/runtime.pyc
 
 ```
 
 ### My Solve
 
-- we download the file and open it. I think you know what to do... 
+- used a python decompiler on the .pyc file 
 
-```
-Your encrypted flag: 67901295092999403377812474031753022640207373798290839976120254385637043193411358791915464230611073615341268787302565972547452757697916207952702288626173819641234095639259743277146365018265212857092237457393449677065307951821155969047439248276581778411840300731922481525641974287306159852931109413442675622573
-Public Key:
-n: 98813858186636016061828413291587334532178109240417756890955763078740391019450718373743031325554048662069578591495075978203742992839688516726192682096525494907367614705518833413598767554267177141399324414271413882430512533175133684772034149758259287505147508079731874384109521277000217376431320424120947279649
-e: 65537
-```

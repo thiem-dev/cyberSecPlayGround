@@ -784,12 +784,115 @@ hint from Discord: On my laptop, given the right hashcat settings, it took less 
 hashcat -m 13600 ziphash.txt /path/to/wordlist.txt
 
 
+
+
+
 ## Prime Time [Crypto]
 
 ### Task
 ```
 150pts 
-https://ctfd.uscybergames.com/files/7f37a3abcfaecaf8fa30c777ee47f809/hint.txt
-https://ctfd.uscybergames.com/files/38a2e2811e019f738aa6556cb9b73aee/short_n_sweet.zip
+https://ctfd.uscybergames.com/files/d44f694b587680234db32147fbe7ae78/challenge.txt
 ```
 
+### My Solve
+
+- we download the file and open it. I think you know what to do... 
+
+```
+Your encrypted flag: 67901295092999403377812474031753022640207373798290839976120254385637043193411358791915464230611073615341268787302565972547452757697916207952702288626173819641234095639259743277146365018265212857092237457393449677065307951821155969047439248276581778411840300731922481525641974287306159852931109413442675622573
+Public Key:
+n: 98813858186636016061828413291587334532178109240417756890955763078740391019450718373743031325554048662069578591495075978203742992839688516726192682096525494907367614705518833413598767554267177141399324414271413882430512533175133684772034149758259287505147508079731874384109521277000217376431320424120947279649
+e: 65537
+```
+
+
+## xorcellent flag checker [Crypto]
+
+### Task
+```
+200pts
+Can you successfully figure out the flag to correctly pass this checker?
+https://ctfd.uscybergames.com/files/95a31068b91eac01ae818515e70641ad/rev 
+```
+
+### My Solves
+
+- ddd
+
+## Math Reversal [Reverse Engineering]
+
+### Task
+```
+150pts
+Do some calculations to find the correct flag
+https://ctfd.uscybergames.com/files/278ac25b3b73811bb4dd255be528b81a/beginnerREChal_1
+
+```
+
+### My Solve
+
+
+```js
+
+//check flag function
+
+00001159  int64_t checkflag(char* arg1)
+
+00001166      int32_t var_1c = 0 //32bit int
+000011ba      int64_t rax_9 //64 bit int
+000011ba      while (true)
+000011c8          if (sx.q(var_1c) u< strlen(arg1) && var_1c s<= 0x1e) // quadword 64bits 
+000011a0              if (flagCheck[sx.q(var_1c)] + sx.d(arg1[sx.q(var_1c)]) != 0x80)
+000011a2                  rax_9 = 0
+000011a7                  break
+000011a9              var_1c = var_1c + 1
+000011a9              continue
+000011da          if (strlen(arg1) != 0x1f)
+000011e3              rax_9 = 0
+000011da          else
+000011dc              rax_9 = 1
+000011d6          break
+000011ed      return rax_9
+```
+
+
+
+- find the flag values in memory
+    - notice that it's very padded with random characters 
+
+```python
+flag_check = [
+    0x2d, 0x37, 0x00, 0x2a, 0x00, 0x00, 0x37, 0x00, 0x2a, 0x00, 
+    0x00, 0x3e, 0x39, 0x00, 0x00, 0x25, 0x00, 0x00, 0x00, 0x00, 
+    0x2e, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x0a, 0x00, 
+    0x00, 0x00, 0x4d, 0x00, 0x00, 0x00, 0x0e, 0x00, 0x00, 0x00, 
+    0x07, 0x00, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00, 0x1c, 0x00, 
+    0x00, 0x00, 0x4f, 0x00, 0x00, 0x00, 0x1a, 0x00, 0x00, 0x00, 
+    0x1a, 0x00, 0x00, 0x00, 0x4f, 0x00, 0x00, 0x00, 0x1d, 0x00, 
+    0x00, 0x00, 0x0b, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 
+    0x0c, 0x00, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00, 0x10, 0x00, 
+    0x00, 0x00, 0x1f, 0x00, 0x00, 0x00, 0x0d, 0x00, 0x00, 0x00, 
+    0x0d, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x50, 0x00, 
+    0x00, 0x00, 0x0e, 0x00, 0x00, 0x00, 0x1c, 0x00, 0x00, 0x00, 
+    0x03, 0x00, 0x00, 0x00
+]
+
+
+# Calculate the flag
+flag = ''.join([chr(0x80 - val) for val in flag_check])
+
+print("Flag:", flag)
+```
+
+- remove all teh un
+
+`SI\x80V\x80\x80I\x80V\x80\x80BG\x80\x80[\x80\x80\x80\x80R\x80\x80\x80{\x80\x80\x80v\x80\x80\x803\x80\x80\x80r\x80\x80\x80y\x80\x80\x80_\x80\x80\x80d\x80\x80\x801\x80\x80\x80f\x80\x80\x80f\x80\x80\x801\x80\x80\x80c\x80\x80\x80u\x80\x80\x80l\x80\x80\x80t\x80\x80\x80_\x80\x80\x80p\x80\x80\x80a\x80\x80\x80s\x80\x80\x80s\x80\x80\x80w\x80\x80\x800\x80\x80\x80r\x80\x80\x80d\x80\x80\x80}`
+
+`SI\V\\I\V\\BG\\[\\\\R\\\{\\\v\\\3\\\r\\\y\\\_\\\d\\\1\\\f\\\f\\\1\\\c\\\u\\\l\\\t\\\_\\\p\\\a\\\s\\\s\\\w\\\0\\\r\\\d\\\}`
+
+`SIVIVBG[R{v3ry_d1ff1cult_passw0rd}` - notice how there's extra characters that aren't usually in the flag, remove them and you get..  `SIVBGR{v3ry_d1ff1cult_passw0rd}`
+
+
+
+![alt text](mathReversal.png)
