@@ -818,7 +818,20 @@ https://ctfd.uscybergames.com/files/95a31068b91eac01ae818515e70641ad/rev
 
 ### My Solves
 
-- ddd
+- I first checked for strings, hexdump, but there's nothing readable. 
+- So I threw it into ghidra for analysis. The file has been stripped, so I found the main function (the one that calls all the others). 
+- Found the possible flag check function, and renamed the functions for readability. 
+  - checking the size of the input string is size `0x16` (22), if not then return 0 and exit.
+  - The function maybeFlagCheck is loop through characters saved at `DAT_00104050` and `DAT_00104070` and XORs them then compares it to the character input. 
+  - if all chars match then return 0. 
+  - in this case we can just XOR the values and get the flag directly. 
+
+
+![alt text](xorcellent.png)
+
+`SIVBGR{x0r_B@s1cs_R3v}`
+
+
 
 ## Math Reversal [Reverse Engineering]
 
@@ -894,5 +907,5 @@ print("Flag:", flag)
 `SIVIVBG[R{v3ry_d1ff1cult_passw0rd}` - notice how there's extra characters that aren't usually in the flag, remove them and you get..  `SIVBGR{v3ry_d1ff1cult_passw0rd}`
 
 
-
+- the right side has all the hexes for the flag_check array that we need to run `x80 - x` through to get the final characters
 ![alt text](mathReversal.png)
