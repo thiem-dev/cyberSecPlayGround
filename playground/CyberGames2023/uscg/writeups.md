@@ -91,6 +91,9 @@ Author: tsuto
 `scheduleTimeoutEvent` seems like an important item
 
 
+Herman note: https://uscybercombine-s4-web-ding-o-tron.chals.io/static/assets/js/main.js
+
+
 
 ## Tubes Tubes
 
@@ -138,22 +141,50 @@ ssh -i id_uscg uscg@tubes.challs.uscybergames.com 'tcpdump -i any udp -w -' | wi
 `sivuscg{t0t4lly_tub4l4r}`
 
 
-
-#### I believe the below is to mislead us. 
-
+## StarTrek 1
 
 
-- found an json object that i could export with the rsa key 
+### Task 
+```
+500
+You are a remote navigator directing Captain Kirk, who is commanding the USS Enterprise, and Captain Spock, who is commanding the USS Endeavour. Your mission is to guide them on a journey 100 galaxies away to an ancient, advanced civilization known as the "Architects" who have hidden a powerful artifact. This artifact, known as the "Quantum Key," has the potential to unlock new dimensions, granting unparalleled knowledge and power to its possessor...
 
-`ssh -i rsa1.rsa coachelliott@35.229.42.74`
+But your ships' warp drives are limited and as you journey through the galaxies, you discover that some contain ancient portal mechanisms that can instantly transport you to another galaxy. These portals are unpredictable and may send you further ahead (Slipstream Portals) or behind (Wormhole Portals) your current position. Can you strategically navigate these worlds and accomplish your mission on limited fuel?
 
-- strange pipes characters found between 56577 -> 1337
+Author: DrBHacking
 
-ssh -i id_uscg uscg@tubes.challs.uscybergames.com 'tcpdump -i any -w -' | wireshark -k -i -
+hint1: Start by finding the Galaxy Map that shows the location of the portals.
+
+hint2: You may need to strategically use both types of portals! 
+
+https://ctfd.uscybergames.com/files/8130d5cb63b322d2d65b60e551316eb1/startrek
+
+```
 
 
-`echo "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPiyaCvgEnLCL79gS6ak1QjdAlbJ92/t2/rUHh01JCMrILj/iOUxcxjPbg11erUjnrBeRJh24pgMm3aedJNM+yE= coachelliott@uscybergames.org" >> ~/.ssh/authorized_keys` 
+### My solve
+
+- open it in binary ninja. 
+
+- set break point for jump
+- take note that the functions sub_xxxxxx are dynamically generated. from address: `0x5555555553a1`. we changed `mov edi, eax. ` to `mov edi, 42` (any number works, we just kept it from being random)
+- TODO : run the program and find the consistent worm holes and slipstreams.  to reach destination??? X? 
 
 
-wireshark filter to ind a private rsa key `tls.handshake.type == 1`
 
+## Encryptomatic
+
+```
+176
+Our new Encryptomatic tool makes securing your messages a snap!
+
+nc 0.cloud.chals.io 28962
+
+Author: tsuto
+
+https://ctfd.uscybergames.com/files/55023c6fd00287dc6ba70fddc0fd7f4c/main.py?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNTN9.ZmLd_A.HVwrQZEZPo-bYOjXyWGzfQMq2tY
+```
+
+
+- tried to pad out the user input to find the flag, but didn't work. 
+- TODO: maybe try something other than NC or stiff the network? 

