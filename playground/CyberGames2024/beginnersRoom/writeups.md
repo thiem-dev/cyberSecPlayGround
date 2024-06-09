@@ -742,6 +742,14 @@ x/64x $rsp
 
 
 
+- looks like there'a ROPGadget we can use. seee:  http://ropshell.com/ 
+  - upload the ELF
+  - helps find the ROPGadgets to manipulate parts of memory.
+    - it's a type of buffer overflow control that let's us print items out in memory by manipulating the stack
+    - ex: `pop rdi; ret` , `leave; ret`, `pop rbp; ret`
+
+
+
 ## Baby's First RSA [Crypto]
 
 ### Task
@@ -763,6 +771,7 @@ e: 3
 ```
 
 - the hint is RSA cipher, I open the file and see C, N, E and immediately I know what to do. I do the RSA cipher in dCode tool and got the answer
+
 
 
 
