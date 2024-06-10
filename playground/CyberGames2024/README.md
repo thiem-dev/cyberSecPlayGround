@@ -38,9 +38,9 @@
 
 
 ## You can find the Problem files here (some of them)
-- 
+- https://github.com/thiem-dev/ePortfolio-cyberSecPlayGround/tree/main/playground/CyberGames2024/AAproblemFiles 
 
-# Solutions for CyberGames for archiving purposes
+# Other players' Solutions for CyberGames for archiving purposes
 1. https://github.com/AustinStitz-Hacking/SIVUSCG-Writeups 
 2. https://github.com/bsdtrhodes/2024cybergames 
 3. https://mr-mph.notion.site/US-Cyber-Open-Writeups-75fcd9245bfb4186833fd688ac9eefed 
