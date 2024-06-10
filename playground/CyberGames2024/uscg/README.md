@@ -113,7 +113,7 @@ Connection: close
 
 
 
-## Emoticonsole
+## Emoticonsole - unsolved
 ### Task 
 ```
 462
@@ -132,7 +132,7 @@ https://ctfd.uscybergames.com/files/08f708f633199eb11e5113999d3d3d5b/runtime.pyc
 
 
 
-## Ding-O-Tron
+## Ding-O-Tron - unsolved
 ```
 100
 What came first? The ding...or the flag?
@@ -202,7 +202,7 @@ ssh -i id_uscg uscg@tubes.challs.uscybergames.com 'tcpdump -i any udp -w -' | wi
 `sivuscg{t0t4lly_tub4l4r}`
 
 
-## StarTrek 1
+## StarTrek 1 - unsolved
 
 
 ### Task 
@@ -233,7 +233,7 @@ https://ctfd.uscybergames.com/files/8130d5cb63b322d2d65b60e551316eb1/startrek
 
 
 
-## Encryptomatic
+## Encryptomatic- unsolved
 
 ```
 176
@@ -396,7 +396,7 @@ https://webhook.site/0baeaa9f-a9d6-467c-81fb-648c3e08d010/{"flag":"SIVUSCG{thr0u
 
 
 
-## Sign... Compress... Encrypt??? [Crypto]
+## Sign... Compress... Encrypt??? [Crypto] - unsolved
 
 ### Task
 408
