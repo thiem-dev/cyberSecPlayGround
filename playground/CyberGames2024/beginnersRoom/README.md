@@ -20,7 +20,7 @@ URL encode the a malicious code to curl the localhost to get to `/shutdown`
 
 
 
-## I Want to Believe [Forensics] - TODO
+## I Want to Believe [Forensics] - Unsolved (solved after the games)
 - gift.gif
 - possible lead? seems to have a white flash frame in the gif
 
@@ -188,7 +188,7 @@ https://uscybercombine-s4-parts-shop.chals.io/
 ```
 ![alt text](partsShop1.png)
 
-## SCS [Web] - TODO
+## SCS [Web]
 
 ### Task
 ```
@@ -610,7 +610,7 @@ https://ctfd.uscybergames.com/files/3679aeb619d8182d54e43d4d46b0b4fc/URGENT_Proo
 
 
 
-## Container Chronicles [Misc] - TODO
+## Container Chronicles [Misc] - Unsolved
 ```
 150
 Welcome, aspiring digital detectives, to the Container Chronicles challenge! Your mission, should you choose to accept it, is to delve into the depths of a seemingly ordinary image of a shipping container and uncover its hidden secrets.
