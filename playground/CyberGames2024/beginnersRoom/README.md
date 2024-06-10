@@ -970,7 +970,5 @@ https://uscybercombine-touch-grass.chals.io/
 - the code the has the notes `// copy from the /admin/api/register endpoint`
 
 - register the admin in burp and then take the session cookie and login as that user
+- then touch that grass through `/admin/api/click` with the admin cookie. 
 
-
-
-<img src="https://images.unsplash.com/photo-1533460004989-cef01064af7e?q=80&amp;w=2070&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Grass" id="grass" onclick="$(this).click(function() { $.post('/api/click', { clicked: true }, function(data) { console.log('Click request sent successfully.'); }); })">
