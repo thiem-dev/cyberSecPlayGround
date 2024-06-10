@@ -535,19 +535,18 @@ Connection closed by foreign host.
 
 
 First Byte:
-
 Encrypted byte: 0x7c
 Shared secret byte: 0x2f
 XOR operation: 0x7c ^ 0x2f = 0x53
 Convert 0x53 to character: S
-Second Byte:
 
+Second Byte:
 Encrypted byte: 0x66
 Shared secret byte: 0x2f
 XOR operation: 0x66 ^ 0x2f = 0x49
 Convert 0x49 to character: I
-Third Byte:
 
+Third Byte:
 Encrypted byte: 0x79
 Shared secret byte: 0x2f
 XOR operation: 0x79 ^ 0x2f = 0x56
