@@ -8,7 +8,7 @@
 # Tools I learned more about in this CTF
 
 - Web 
-  - Burp suite - sniper attacks / enums, XXS, SSRF, cookie spoofing
+  - Burp suite - sniper attacks / enums, XSS, SSRF, cookie spoofing
   - JWT forging
   - OWASP Zap - enums, vulnerability levels
   - socket connections in python
