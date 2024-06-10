@@ -27,16 +27,6 @@
   - Ghidra - web assembly code and memory inspection
 
 
-## Tools that were most used in this CTF
-
-- lots of files in here use
-  - basecrack
-  - CyberChef, heavy base64, XOR
-  - binwalk, foremost?, 
-  - wireshark
-  
-
-
 ## You can find the Problem files here (some of them)
 - https://github.com/thiem-dev/ePortfolio-cyberSecPlayGround/tree/main/playground/CyberGames2024/AAproblemFiles 
 
