@@ -50,9 +50,7 @@ URL encode the a malicious code to curl the localhost to get to `/shutdown`
 
 ## Flag Checker [Reverse Engineering]
 
-
-- According to GPT: 
-TLDR: literally swap out the operations in reverse and use better variable names. 
+- TLDR: literally swap out the operations in reverse and use better variable names. 
 
 
 To decrypt the flag from this Python code, we need to reverse the operations applied to `libraryDiscussion` to transform it into `phoneSteak`. Here are the steps to decrypt the flag:
@@ -132,7 +130,7 @@ https://uscybercombine-s4-parts-shop.chals.io/
     <?xml version="1.0" encoding="UTF-8"?><parts><part id="1"><name>XtraGrip Robo Arm 3000</name><author>Bender</author><image>/static/img/xtragrip.png</image><description>A necessity for all tactile machines that need to interact with the human world.</description></part><part id="2"><name>Xray Scan Matrix 1.4</name><author>Baymax</author><image>/static/img/xrayscan.png</image><description>A component for your vision system using X-ray technology to analyze the environment.</description></part><part id="3"><name>ElectroSynth Core U-152</name><author>Optimus Prime</author><image>/static/img/electrosynth.png</image><description>The newest version of the main module for regulating internal functions.</description></part></parts>    
     ```
 
-hmmm seems like an interesting lead on part id, let's enum through.... 
+- hmmm seems like an interesting lead on part id, let's enum through.... 
     - tried https://uscybercombine-s4-parts-shop.chals.io/parts?id=4 and etc and URL params ... no luck
 
 
