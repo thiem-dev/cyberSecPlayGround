@@ -24,6 +24,8 @@ URL encode the a malicious code to curl the localhost to get to `/shutdown`
 - gift.gif
 - possible lead? seems to have a white flash frame in the gif
 
+### My solution
+
 - stegsolve.jar (helps with analyzing frames, possible some on frame 5 on the bottom right)
 - there are hidden items on frame5, but hidden files as a full gift.gif
 
@@ -32,9 +34,8 @@ URL encode the a malicious code to curl the localhost to get to `/shutdown`
 - there's a hint in the discord that the GIFt tool is really really the solution. So let's find all the possible gif steg extraction tools
   - outguess: `outguess -r <input file> <output file>`
 
-
-- herman - look for a way to reverse ezgif cut
-- arlene: May need to use Python or OpenCV or other advanced techniques. Maybe look up bit plane splicing? 
+### Solution from someone else after the end of the games
+- The solution write up from someone else:  https://github.com/sa1181405/uscybergames-pbchocolate-writeups/blob/main/uscybergames/beginner-room/forensics/iwanttobelieve.md 
 
 
 ## Hunt [web]
@@ -263,10 +264,6 @@ https://uscybercombine-s4-scs.chals.io/
     - I'm starting to think this was from the prior intruder sniper attack I gave it.
 
 
-- herman: uploads / a b c ??? 
-  - malicious code. 6 chaacter attack, burp
-
-
 - we uploaded this reverse shell
 ```
 <?php
@@ -288,7 +285,7 @@ and shell.php
   - HTML encode this for the URL `find+/+-type+f+-name+flag.txt`
 
 
-## Spreading Out [Web] - TODO
+## Spreading Out [Web]
 ### Task
 ```
 Spreading Out [Web]
@@ -337,7 +334,7 @@ https://uscybercombine-s4-spreading-out.chals.io/
   - this was not neccessary
 
 
-## Biocheck [web] - TODO
+## Biocheck [web] - unsolved
 
 ### task
 ```js
@@ -352,7 +349,7 @@ https://uscybercombine-s4-biocheck.chals.io/
 ### My solve
 
 
-## Cloud Storage [Misc] - TODO
+## Cloud Storage [Misc] - unsolved
 
 ### Task 
 ```js
@@ -671,7 +668,7 @@ https://ctfd.uscybergames.com/files/b694602c1b73e94e94d82977a9acbed9/intercepted
 
 
 
-## Hangman's Shell [Pwn] TODO 
+## Hangman's Shell [Pwn] - unsolved 
 
 
 ### Task

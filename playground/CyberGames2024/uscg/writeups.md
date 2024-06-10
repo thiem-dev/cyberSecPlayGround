@@ -406,4 +406,10 @@ Author: BenderBot
 
 https://uscybercombine-s4-crypto-sign-compress-encrypt.chals.io
 
-### 
+
+https://ctfd.uscybergames.com/files/4f965bc448a02e079c1f420480a57983/sign_compress_encrypt.py?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjozMDd9.ZmZCtQ.LbQfxNsXHCtY3NXMH1f6Tep5H-c
+
+### My Solve
+
+
+
