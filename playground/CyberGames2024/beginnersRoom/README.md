@@ -1,6 +1,7 @@
 
 
 # Beginner's Room
+- solutions outside beginner are here: https://github.com/thiem-dev/ePortfolio-cyberSecPlayGround/edit/main/playground/CyberGames2024/uscg/README.md 
 
 flag structure: `SIVBGR{xxxxxx}`
 
