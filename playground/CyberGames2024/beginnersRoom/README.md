@@ -322,12 +322,11 @@ https://uscybercombine-s4-spreading-out.chals.io/
 - /sitemap.xml : `4/5: _c4nnot_b3` 
 - /wwwlog : Permission not granted
 
-- then... with the 4 out of the 5 
+- then... with the 4 out of the 5 we can make a good guess at 5/5 flag (gotta love brute force)
 `SIVBGR{ARIA_1s_spreading_3v3rywh3r3_4lw4ys_4nd_c4nnot_b3_st0pp3d}`
 
 
 - used the word list: https://github.com/bryanmcnulty/ctf-wordlists/blob/main/web-content/dirsearch.txt
-
 
 - trying ffuf: `ffuf -w /usr/share/wordlists/dirb/common.txt -u https://uscybercombine-s4-spreading-out.chals.io/FUZZ -recursion -recursion-depth 3` 
   - this was not neccessary
