@@ -13,7 +13,7 @@ One of our machines was recently hit with malware and appears to have opened a b
 
 Author: tsuto
 
-https://ctfd.uscybergames.com/files/6f9d8cad46a69ec3408cc68560d9cf64/certified.pcapng?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyODR9.Zl8ZzQ.CeNN3KtBazLgH3kKEPxxpYsItzM
+https://ctfd.uscybergames.com/files/6f9d8cad46a69ec3408cc68560d9cf64/certified.pcapng
 
 ```
 
@@ -243,7 +243,7 @@ nc 0.cloud.chals.io 28962
 
 Author: tsuto
 
-https://ctfd.uscybergames.com/files/55023c6fd00287dc6ba70fddc0fd7f4c/main.py?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjoyNTN9.ZmLd_A.HVwrQZEZPo-bYOjXyWGzfQMq2tY
+https://ctfd.uscybergames.com/files/55023c6fd00287dc6ba70fddc0fd7f4c/main.py
 ```
 
 
@@ -407,7 +407,7 @@ Author: BenderBot
 https://uscybercombine-s4-crypto-sign-compress-encrypt.chals.io
 
 
-https://ctfd.uscybergames.com/files/4f965bc448a02e079c1f420480a57983/sign_compress_encrypt.py?token=eyJ1c2VyX2lkIjoxOTYyLCJ0ZWFtX2lkIjpudWxsLCJmaWxlX2lkIjozMDd9.ZmZCtQ.LbQfxNsXHCtY3NXMH1f6Tep5H-c
+https://ctfd.uscybergames.com/files/4f965bc448a02e079c1f420480a57983/sign_compress_encrypt.py
 
 ### My Solve
 
